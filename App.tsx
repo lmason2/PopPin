@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
 import CreateAccount from './src/pages/createAccount';
-import Login from './src/pages/login';
+import {LoginHome} from './src/pages/loginHome';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +14,7 @@ const App = () => {
     <NavigationContainer>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="LoginHome" component={LoginHome} />
         <Stack.Screen name="Create" component={CreateAccount} />
       </Stack.Navigator>
     </NavigationContainer>

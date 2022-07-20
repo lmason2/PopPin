@@ -6,7 +6,7 @@ export const CenteredXYColumnContainer = styled.View`
   justify-content: center;
   align-items: center;
   padding-horizontal: 5px;
-  background-color: #faf2da;
+  background-color: white;
 `;
 
 export const ImageCenteredXYColumnContainer = styled.ImageBackground`
@@ -21,6 +21,7 @@ export const LeftXCenteredYRowContainer = styled.View`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  background-color: white;
 `;
 
 export const CenteredXBottomYColumnContainer = styled.View`
@@ -28,6 +29,15 @@ export const CenteredXBottomYColumnContainer = styled.View`
   align-items: center;
   width: 100%;
   height: 100%;
+  background-color: white;
+`;
+
+export const CenteredXTopYColumnContainer = styled.View`
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
 `;
 
 export const LeftXTopYColumnContainer = styled.View`
@@ -35,6 +45,7 @@ export const LeftXTopYColumnContainer = styled.View`
   align-items: flex-start;
   width: 100%;
   height: 100%;
+  background-color: white;
 `;
 
 export const RightXCenteredYRowContainer = styled.View`
@@ -42,6 +53,7 @@ export const RightXCenteredYRowContainer = styled.View`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
+  background-color: white;
 `;
 
 export const AbsoluteContainer = styled.View`
@@ -51,4 +63,5 @@ export const AbsoluteContainer = styled.View`
   top: 0px;
   right: 0px;
   z-index: 3;
+  background-color: white;
 `;

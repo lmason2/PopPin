@@ -1,7 +1,7 @@
 export const styles = {
   colors: {
-    background: 'FAF2DA',
-    accent: 'red',
+    background: '#fff',
+    accent: '#D00000',
   },
   font: {
     main: 'Futura',
