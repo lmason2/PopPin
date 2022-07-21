@@ -1,6 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Text} from 'react-native';
 import {
   LoginHomeButton,
   LoginText,
@@ -18,7 +17,7 @@ export const LoginHome = () => {
       </LoginHomeButton>
       <RegisterHomeButton
         onPress={() => {
-          navigation.navigate('Create');
+          navigation.navigate('AddEmail');
         }}>
         <RegisterText>Register</RegisterText>
       </RegisterHomeButton>

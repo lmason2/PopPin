@@ -4,7 +4,7 @@ import {
   LeftXCenteredYRowContainer,
   LeftXTopYColumnContainer,
 } from '../../shared/containers.styled';
-import {H1, H5} from '../../shared/text.styled';
+import {H1, H3, H5} from '../../shared/text.styled';
 
 export const InputContainer = styled(LeftXCenteredYRowContainer)`
   width: 90%;
@@ -18,8 +18,8 @@ export const InputContainer = styled(LeftXCenteredYRowContainer)`
 
 export const MainText = styled(H1)`
   color: black;
-  font-weight: 400;
-  font-size: 25px;
+  font-weight: 600;
+  font-size: 35px;
   margin-left: 5%;
   margin-top: 10%;
 `;
@@ -106,4 +106,25 @@ export const InfoText = styled(H5)`
   margin-right: 5%;
   text-align: left;
   margin-top: 5%;
+`;
+
+export const InputText = styled(H5)`
+  font-family: Cairo;
+  color: black;
+  margin-left: 5%;
+  line-height: 18px;
+  margin-right: 5%;
+  text-align: left;
+  margin-top: 2%;
+`;
+
+export const SubText = styled(H3)`
+  font-family: Cairo;
+  color: black;
+  font-size: 15px;
+  font-weight: 700;
+  margin-left: 5%;
+  line-height: 20px;
+  margin-right: 5%;
+  text-align: left;
 `;
