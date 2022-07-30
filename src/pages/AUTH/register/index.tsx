@@ -1,34 +1,29 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {LoginInput} from '../../shared/form.styled';
+import React, {useState} from 'react';
+import {LoginInput} from '../../../shared/form.styled';
 import {Icon} from '@rneui/themed';
 import {
   BackButton,
   MainText,
   InputContainer,
-  LoginButton,
   SignUpText,
   SignUpButton,
   InfoText,
   InputText,
   SubText,
-} from './Login.styled';
-import {
-  LeftXTopYColumnContainer,
-  RightXCenteredYRowContainer,
-} from '../../shared/containers.styled';
-import {H5} from '../../shared/text.styled';
+} from './register.styled';
+import {LeftXTopYColumnContainer} from '../../../shared/containers.styled';
 import {useNavigation} from '@react-navigation/native';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-import {firebaseAuth} from '../../config/db';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {db, firebaseAuth} from '../../../config/db';
+import {setDoc, doc} from 'firebase/firestore';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../../../App';
 
 let globalEmail = '';
 let globalPassword = '';
 
 export const AddEmail = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [email, setEmail] = useState('');
   return (
     <>
@@ -53,7 +48,7 @@ export const AddEmail = () => {
         <SignUpButton
           onPress={() => {
             globalEmail = email;
-            navigation.navigate('AddPassword');
+            navigation.navigate('AddPassword', {});
           }}>
           <SignUpText>ENTER</SignUpText>
         </SignUpButton>
@@ -63,7 +58,7 @@ export const AddEmail = () => {
 };
 
 export const AddPassword = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   return (
@@ -102,7 +97,7 @@ export const AddPassword = () => {
         <SignUpButton
           onPress={() => {
             globalPassword = password;
-            navigation.navigate('AddUsername');
+            navigation.navigate('AddUsername', {});
           }}>
           <SignUpText>ENTER</SignUpText>
         </SignUpButton>
@@ -112,17 +107,20 @@ export const AddPassword = () => {
 };
 
 export const AddUsername = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const [username, setUsername] = useState('');
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(firebaseAuth, globalEmail, globalPassword)
-      .then(userCredential => {
+      .then(async userCredential => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        navigation.navigate('Map');
-        // ...
+        const userData = {
+          username: username,
+        };
+        await setDoc(doc(db, 'users', globalEmail), userData);
+        navigation.navigate('Welcome', {});
       })
       .catch(error => {
         const errorCode = error.code;
@@ -157,69 +155,6 @@ export const AddUsername = () => {
           By signing up, you agree to the Terms of Service and Privacy Policy.
         </InfoText>
       </LeftXTopYColumnContainer>
-    </>
-  );
-};
-/////////////////////////////////////
-
-export const LoginForm = () => {
-  const [passwordRevealed, setPasswordRevealed] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleAccountLogin = () => {
-    // signInWithEmailAndPassword(firebaseAuth, email, password)
-    //   .then(userCredential => {
-    //     const user = userCredential.user;
-    //     console.log(user);
-    //   })
-    //   .catch(error => {
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     console.log(errorCode);
-    //     console.log(errorMessage);
-    //   });
-  };
-  return (
-    <>
-      <InputContainer>
-        <Icon name="mail" color="red" type="ionicon" />
-        <LoginInput
-          placeholder="Email"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-          onChangeText={(newEmail: React.SetStateAction<string>) =>
-            setEmail(newEmail)
-          }
-          defaultValue={email}
-        />
-      </InputContainer>
-      <InputContainer>
-        <Icon name="ios-lock-closed" color="red" type="ionicon" />
-        <LoginInput
-          placeholder="Password"
-          secureTextEntry={!passwordRevealed}
-          textContentType="password"
-          onChangeText={(newPassword: React.SetStateAction<string>) =>
-            setPassword(newPassword)
-          }
-          defaultValue={password}
-        />
-        <Icon
-          name={passwordRevealed ? 'eye-slash' : 'eye'}
-          color="red"
-          type="font-awesome-5"
-          onPress={() => {
-            setPasswordRevealed(p => !p);
-          }}
-        />
-      </InputContainer>
-      <RightXCenteredYRowContainer>
-        <LoginButton onPress={handleAccountLogin}>
-          <H5>Login</H5>
-          <Icon name="arrow-forward-sharp" color="white" type="ionicon" />
-        </LoginButton>
-      </RightXCenteredYRowContainer>
     </>
   );
 };

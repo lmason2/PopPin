@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
-import {CenteredXYColumnContainer} from '../../shared/containers.styled';
+import {CenteredXYColumnContainer} from '../../../shared/containers.styled';
 
 const Map = () => {
   return (

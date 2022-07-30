@@ -2,9 +2,21 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {StatusBar, useColorScheme} from 'react-native';
-import {AddEmail, AddPassword, AddUsername} from './src/components/Login';
-import {LoginHome} from './src/pages/loginHome';
-import Map from './src/pages/map';
+import {AddEmail, AddPassword, AddUsername} from './src/pages/AUTH/register';
+import {LoginHome} from './src/pages/AUTH/loginHome';
+import Login from './src/pages/AUTH/login';
+import Welcome from './src/pages/welcome';
+import Home from './src/pages/HOME';
+
+export type RootStackParamList = {
+  LoginHome: {};
+  Login: {};
+  AddEmail: {};
+  AddPassword: {};
+  AddUsername: {};
+  Welcome: {};
+  Home: {};
+};
 
 const Stack = createNativeStackNavigator();
 
@@ -16,10 +28,12 @@ const App = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="LoginHome" component={LoginHome} />
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="AddEmail" component={AddEmail} />
         <Stack.Screen name="AddPassword" component={AddPassword} />
         <Stack.Screen name="AddUsername" component={AddUsername} />
-        <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
