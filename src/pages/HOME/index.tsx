@@ -7,11 +7,17 @@ import Settings from './settings';
 import {styles} from '../../shared/colors';
 import {db, firebaseAuth} from '../../config/db';
 import {doc, getDoc} from 'firebase/firestore';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
+import {CenteredXYColumnContainer} from '../../shared/containers.styled';
+import {MapData, Coordinates} from '../../shared/types';
 
 const Tab = createBottomTabNavigator();
 
-const getAllData = async (setDataLoaded: any, setData: any) => {
+export type TabParamList = {
+  Map: {lat: number; long: number};
+};
+
+const getAllData = async (setDataLoaded: any, setMapData: any) => {
   const user = firebaseAuth.currentUser;
   if (user != null) {
     const email = user.email as string;
@@ -20,7 +26,21 @@ const getAllData = async (setDataLoaded: any, setData: any) => {
     if (docSnap.exists()) {
       const data = docSnap.data();
       console.log(data);
-      setData(data);
+      const collegeRef = doc(db, 'colleges', data?.college);
+      const collegeSnap = await getDoc(collegeRef);
+      if (collegeSnap.exists()) {
+        const collegeData = collegeSnap.data();
+        const coordinates: Coordinates = {
+          lat: collegeData.coords.latitude,
+          long: collegeData.coords.longitude,
+        };
+        const passedData: MapData = {
+          coordinates: coordinates,
+          zoom: 5,
+          bars: [],
+        };
+        setMapData(passedData);
+      }
     } else {
       // doc.data() will be undefined in this case
       console.log('No such document!');
@@ -31,14 +51,14 @@ const getAllData = async (setDataLoaded: any, setData: any) => {
 
 const Home = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState<MapData>();
   useEffect(() => {
     getAllData(setDataLoaded, setData);
   }, []);
   return !dataLoaded ? (
-    <View>
+    <CenteredXYColumnContainer>
       <Text>Loading</Text>
-    </View>
+    </CenteredXYColumnContainer>
   ) : (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -64,7 +84,14 @@ const Home = () => {
       })}
       initialRouteName="Map">
       <Tab.Screen name="Social" component={Social} />
-      <Tab.Screen name="Map" component={Map} />
+      <Tab.Screen
+        name="Map"
+        component={Map}
+        initialParams={{
+          lat: data?.coordinates.lat,
+          long: data?.coordinates.long,
+        }}
+      />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
