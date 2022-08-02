@@ -127,8 +127,9 @@ export const AddUsername = () => {
         console.log(user);
         const userData = {
           username: username,
+          college: globalCollege,
         };
-        await setDoc(doc(db, 'users', globalEmail), userData);
+        await setDoc(doc(db, 'users', globalEmail.toLowerCase()), userData);
         navigation.navigate('Welcome', {});
       })
       .catch(error => {

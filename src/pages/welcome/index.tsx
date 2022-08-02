@@ -4,16 +4,16 @@ import {CircleComponent, BarComponent} from '../../components/welcome';
 import {db, firebaseAuth} from '../../config/db';
 import {CenteredXYColumnContainer} from '../../shared/containers.styled';
 
-const getUser = async (setUserLoaded: any, setName: any) => {
+const getUserData = async (setUserLoaded: any, setName: any) => {
   const user = firebaseAuth.currentUser;
   if (user != null) {
-    // const email = user.email as string;
-    const userRef = doc(db, 'users', 'Lukesamuelmason@gmail.com');
+    const email = user.email as string;
+    const userRef = doc(db, 'users', email.toLowerCase());
     const docSnap = await getDoc(userRef);
     if (docSnap.exists()) {
       const data = docSnap.data();
       if (data.username != null) {
-        setName(docSnap.data().username);
+        setName(data.username);
       }
     } else {
       // doc.data() will be undefined in this case
@@ -28,7 +28,7 @@ const Welcome = () => {
   const [name, setName] = useState('');
 
   useEffect(() => {
-    getUser(setUserLoaded, setName);
+    getUserData(setUserLoaded, setName);
   }, []);
 
   return (

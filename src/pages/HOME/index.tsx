@@ -1,15 +1,45 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from '@rneui/themed';
 import Map from './map';
 import Social from './social';
 import Settings from './settings';
 import {styles} from '../../shared/colors';
+import {db, firebaseAuth} from '../../config/db';
+import {doc, getDoc} from 'firebase/firestore';
+import {Text, View} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
+const getAllData = async (setDataLoaded: any, setData: any) => {
+  const user = firebaseAuth.currentUser;
+  if (user != null) {
+    const email = user.email as string;
+    const userRef = doc(db, 'users', email.toLowerCase());
+    const docSnap = await getDoc(userRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      console.log(data);
+      setData(data);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log('No such document!');
+    }
+    setDataLoaded(true);
+  }
+};
+
 const Home = () => {
-  return (
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [data, setData] = useState({});
+  useEffect(() => {
+    getAllData(setDataLoaded, setData);
+  }, []);
+  return !dataLoaded ? (
+    <View>
+      <Text>Loading</Text>
+    </View>
+  ) : (
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused}) => {
