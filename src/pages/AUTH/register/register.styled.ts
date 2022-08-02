@@ -16,6 +16,12 @@ export const InputContainer = styled(LeftXCenteredYRowContainer)`
   border-color: #000;
 `;
 
+export const SearchContainer = styled.View`
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+`;
+
 export const MainText = styled(H1)`
   color: black;
   font-weight: 600;
@@ -64,6 +70,11 @@ export const SignUpText = styled(H5)`
   font-weight: 700;
 `;
 
+export const CollegeText = styled(H5)`
+  font-weight: 700;
+  font-size: 20px;
+`;
+
 export const InfoText = styled(H5)`
   font-family: Cairo;
   color: black;
@@ -93,4 +104,12 @@ export const SubText = styled(H3)`
   line-height: 20px;
   margin-right: 5%;
   text-align: left;
+`;
+
+export const CollegeSubText = styled(SubText)`
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: ${styles.colors.accent};
 `;

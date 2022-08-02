@@ -22,7 +22,7 @@ export const LoginHome = () => {
       </LoginHomeButton>
       <RegisterHomeButton
         onPress={() => {
-          navigation.navigate('AddEmail', {});
+          navigation.navigate('SearchColleges', {});
         }}>
         <RegisterText>Register</RegisterText>
       </RegisterHomeButton>
