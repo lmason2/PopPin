@@ -105,3 +105,9 @@ export const SocialHeader = styled.Text`
   width: 90%;
   margin-vertical: 10px;
 `;
+
+export const AddFriendButton = styled.TouchableOpacity`
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
+`;

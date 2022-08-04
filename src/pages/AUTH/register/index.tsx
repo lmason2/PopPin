@@ -128,6 +128,7 @@ export const AddUsername = () => {
         const userData = {
           username: username,
           college: globalCollege,
+          friends: [],
         };
         await setDoc(doc(db, 'users', globalEmail.toLowerCase()), userData);
         navigation.navigate('Welcome', {});
