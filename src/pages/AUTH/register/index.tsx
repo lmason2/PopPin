@@ -124,7 +124,6 @@ export const AddUsername = () => {
       .then(async userCredential => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
         const userData = {
           username: username,
           college: globalCollege,
