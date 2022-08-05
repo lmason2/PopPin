@@ -8,13 +8,13 @@ import {db, firebaseAuth} from '../../config/db';
 import {doc, getDoc} from 'firebase/firestore';
 import {Text} from 'react-native';
 import {CenteredXYColumnContainer} from '../../shared/containers.styled';
-import {MapData, Coordinates} from '../../shared/types';
+import {MapData, Coordinates, BarData} from '../../shared/types';
 import SettingsStack from './settings/settingsStack';
 
 const Tab = createBottomTabNavigator();
 
 export type TabParamList = {
-  Map: {lat: number; long: number};
+  Map: MapData;
 };
 
 const getAllData = async (setDataLoaded: any, setMapData: any) => {
@@ -31,13 +31,14 @@ const getAllData = async (setDataLoaded: any, setMapData: any) => {
       if (collegeSnap.exists()) {
         const collegeData = collegeSnap.data();
         const coordinates: Coordinates = {
-          lat: collegeData.coords.latitude,
-          long: collegeData.coords.longitude,
+          latitude: collegeData.coords.latitude,
+          longitude: collegeData.coords.longitude,
         };
+        const bars: BarData[] = collegeData.bars;
         const passedData: MapData = {
-          coordinates: coordinates,
+          coordinates,
           zoom: 5,
-          bars: [],
+          bars,
         };
         setMapData(passedData);
       }
@@ -84,14 +85,7 @@ const Home = () => {
       })}
       initialRouteName="Map">
       <Tab.Screen name="Social" component={Social} />
-      <Tab.Screen
-        name="Map"
-        component={Map}
-        initialParams={{
-          lat: data?.coordinates.lat,
-          long: data?.coordinates.long,
-        }}
-      />
+      <Tab.Screen name="Map" component={Map} initialParams={data} />
       <Tab.Screen name="Settings" component={SettingsStack} />
     </Tab.Navigator>
   );
