@@ -3,13 +3,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from '@rneui/themed';
 import Map from './map';
 import Social from './social';
-import Settings from './settings';
 import {styles} from '../../shared/colors';
 import {db, firebaseAuth} from '../../config/db';
 import {doc, getDoc} from 'firebase/firestore';
 import {Text} from 'react-native';
 import {CenteredXYColumnContainer} from '../../shared/containers.styled';
 import {MapData, Coordinates} from '../../shared/types';
+import SettingsStack from './settings/settingsStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -92,7 +92,7 @@ const Home = () => {
           long: data?.coordinates.long,
         }}
       />
-      <Tab.Screen name="Settings" component={Settings} />
+      <Tab.Screen name="Settings" component={SettingsStack} />
     </Tab.Navigator>
   );
 };

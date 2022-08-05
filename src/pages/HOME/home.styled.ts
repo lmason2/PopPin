@@ -111,3 +111,44 @@ export const AddFriendButton = styled.TouchableOpacity`
   width: 30px;
   height: 30px;
 `;
+
+export const SettingsModal = styled.View`
+  display: flex;
+  background: #d9d9d9;
+  border-radius: 20px;
+  width: 90%;
+`;
+
+export const SettingsRow = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  padding-vertical: 30px;
+  padding-horizontal: 20px;
+  align-items: center;
+`;
+
+export const CenteredSettingsRow = styled(SettingsRow)`
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+  padding-vertical: 30px;
+  padding-horizontal: 20px;
+  align-items: center;
+`;
+
+export const SettingsText = styled.Text`
+  margin-left: 20px;
+  color: black;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 15px;
+`;
+
+export const NoMarginSettingsText = styled(SettingsText)`
+  margin-left: 0px;
+`;
+
+export const HR = styled.View`
+  border: 0.5px solid black;
+`;
