@@ -8,10 +8,16 @@ import {
   RegisterHomeButton,
   RegisterText,
 } from '../../../components/login/login.styled';
+import {firebaseAuth} from '../../../config/db';
 import {CenteredXYColumnContainer} from '../../../shared/containers.styled';
 
 export const LoginHome = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  firebaseAuth.onAuthStateChanged(user => {
+    if (user) {
+      navigation.navigate('Welcome', {});
+    }
+  });
   return (
     <CenteredXYColumnContainer>
       <LoginHomeButton

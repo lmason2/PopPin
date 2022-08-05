@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Icon} from '@rneui/themed';
 import React from 'react';
+import {Share} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {CenteredXTopYColumnContainer} from '../../../shared/containers.styled';
 import {HR, SettingsModal, SettingsRow, SettingsText} from '../home.styled';
@@ -9,12 +10,27 @@ import {SettingsStackParamList} from './settingsStack';
 const Settings = () => {
   const navigation =
     useNavigation<StackNavigationProp<SettingsStackParamList>>();
-  const handleShare = () => {
-    console.log('share');
-  };
-
   const handleRate = () => {
     console.log('rate');
+  };
+
+  const handleShare = async () => {
+    try {
+      const result = await Share.share({
+        message: 'PopPin link',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
   return (
     // eslint-disable-next-line react-native/no-inline-styles

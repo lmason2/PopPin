@@ -1,6 +1,6 @@
 export interface Coordinates {
-  lat: number;
-  long: number;
+  latitude: number;
+  longitude: number;
 }
 
 export interface College {
@@ -10,7 +10,7 @@ export interface College {
 
 export interface BarData {
   name: string;
-  coordinates: Coordinates;
+  location: Coordinates;
   attendance: number;
 }
 
