@@ -152,3 +152,23 @@ export const NoMarginSettingsText = styled(SettingsText)`
 export const HR = styled.View`
   border: 0.5px solid black;
 `;
+
+export const OverlayContainer = styled.View`
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  right: 2%;
+  bottom: 5%;
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  z-index: 1000;
+  opacity: 0.8;
+  border-radius: 50px;
+`;
+
+export const ButtonContainer = styled.View`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
