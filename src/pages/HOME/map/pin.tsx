@@ -6,7 +6,7 @@ import React, {FC} from 'react';
 import {View} from 'react-native';
 import {LatLng, Marker} from 'react-native-maps';
 import {RootStackParamList} from '../../../../App';
-import {styles} from '../../../shared/colors';
+import {styles} from '../../../shared/styles';
 
 const getCustomPinMapper: {[type: string]: string} = {
   'Jack & Dans': 'j&d',

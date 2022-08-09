@@ -1,9 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {FC, useEffect, useRef, useState} from 'react';
-import {Animated, Text} from 'react-native';
+import {Animated} from 'react-native';
 import {RootStackParamList} from '../../../App';
-import {styles} from '../../shared/colors';
+import {styles} from '../../shared/styles';
 import {BarView, MainText, WelcomeText} from './welcom.styled';
 
 export const CircleComponent: FC<{name: string}> = ({name}) => {

@@ -49,7 +49,8 @@ const Login = () => {
         <MainText>Welcome Back,</MainText>
         <InputContainer>
           <LoginInput
-            textContentType="email"
+            textContentType="emailAddress"
+            keyboardType="email-address"
             onChangeText={(newEmail: React.SetStateAction<string>) =>
               setEmail(newEmail)
             }

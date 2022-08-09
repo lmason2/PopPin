@@ -1,12 +1,12 @@
 import React from 'react';
-import {CenteredXYColumnContainer} from '../../../shared/containers.styled';
 import {MainText} from '../../AUTH/register/register.styled';
+import {ModalContainer} from './map.styled';
 
 const Modal = () => {
   return (
-    <CenteredXYColumnContainer>
+    <ModalContainer>
       <MainText>Bar Screen</MainText>
-    </CenteredXYColumnContainer>
+    </ModalContainer>
   );
 };
 

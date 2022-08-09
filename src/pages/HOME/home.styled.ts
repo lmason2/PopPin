@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {styles} from '../../shared/colors';
+import {styles} from '../../shared/styles';
 import {CenteredXTopYColumnContainer} from '../../shared/containers.styled';
 
 export const SocialContainer = styled(CenteredXTopYColumnContainer)`

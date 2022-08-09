@@ -4,6 +4,6 @@ export const styles = {
     accent: '#D00000',
   },
   font: {
-    main: 'Futura',
+    main: 'Cairo',
   },
 };

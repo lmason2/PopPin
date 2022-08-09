@@ -24,7 +24,7 @@ import {db, firebaseAuth} from '../../../config/db';
 import {setDoc, doc, getDocs, collection} from 'firebase/firestore';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../../../App';
-import {styles} from '../../../shared/colors';
+import {styles} from '../../../shared/styles';
 import {College} from '../../../shared/types';
 
 let globalEmail = '';

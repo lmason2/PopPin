@@ -13,7 +13,7 @@ import Login from './src/pages/AUTH/login';
 import Welcome from './src/pages/welcome';
 import Home from './src/pages/HOME';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import Modal from './src/pages/HOME/map/modal';
+import Modal from './src/pages/HOME/map/bar';
 import NewEvent from './src/pages/HOME/map/event';
 
 export type RootStackParamList = {

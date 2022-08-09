@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Icon} from '@rneui/themed';
 import Map from './map';
 import Social from './social';
-import {styles} from '../../shared/colors';
+import {styles} from '../../shared/styles';
 import {db, firebaseAuth} from '../../config/db';
 import {doc, getDoc} from 'firebase/firestore';
 import {Text} from 'react-native';
