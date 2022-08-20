@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Icon} from '@rneui/themed';
@@ -19,7 +20,7 @@ const HelpContact = () => {
   const navigation =
     useNavigation<StackNavigationProp<SettingsStackParamList>>();
   return (
-    <LeftXTopYColumnContainer>
+    <LeftXTopYColumnContainer style={{marginTop: 10}}>
       <BackButton
         onPress={() => {
           navigation.goBack();

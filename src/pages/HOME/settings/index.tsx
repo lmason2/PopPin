@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Icon} from '@rneui/themed';
@@ -6,6 +7,7 @@ import {Share} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {CenteredXTopYColumnContainer} from '../../../shared/containers.styled';
 import {HR, SettingsModal, SettingsRow, SettingsText} from '../home.styled';
+import LogoutOverlay from './logoutOverlay';
 import {SettingsStackParamList} from './settingsStack';
 const Settings = () => {
   const navigation =
@@ -33,9 +35,8 @@ const Settings = () => {
     }
   };
   return (
-    // eslint-disable-next-line react-native/no-inline-styles
     <SafeAreaView style={{backgroundColor: 'white'}}>
-      <CenteredXTopYColumnContainer>
+      <CenteredXTopYColumnContainer style={{marginTop: 10}}>
         <SettingsModal>
           <SettingsRow
             onPress={() => {
@@ -64,6 +65,7 @@ const Settings = () => {
           </SettingsRow>
         </SettingsModal>
       </CenteredXTopYColumnContainer>
+      <LogoutOverlay />
     </SafeAreaView>
   );
 };

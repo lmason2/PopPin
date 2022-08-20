@@ -15,8 +15,14 @@ import Home from './src/pages/HOME';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Modal from './src/pages/HOME/map/bar';
 import NewEvent from './src/pages/HOME/map/event';
+import Pre from './src/pages/pre';
+import {
+  CardStyleInterpolators,
+  TransitionPresets,
+} from '@react-navigation/stack';
 
 export type RootStackParamList = {
+  Pre: {};
   LoginHome: {};
   Login: {};
   SearchColleges: {};
@@ -40,13 +46,22 @@ const App = () => {
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Group>
-            <Stack.Screen name="LoginHome" component={LoginHome} />
+            <Stack.Screen name="Pre Screen" component={Pre} />
+            <Stack.Screen
+              name="LoginHome"
+              component={LoginHome}
+              options={{animation: 'slide_from_bottom'}}
+            />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SearchColleges" component={SearchColleges} />
             <Stack.Screen name="AddEmail" component={AddEmail} />
             <Stack.Screen name="AddPassword" component={AddPassword} />
             <Stack.Screen name="AddUsername" component={AddUsername} />
-            <Stack.Screen name="Welcome" component={Welcome} />
+            <Stack.Screen
+              name="Welcome"
+              component={Welcome}
+              options={{animation: 'none'}}
+            />
             <Stack.Screen name="Home" component={Home} />
           </Stack.Group>
           <Stack.Group screenOptions={{presentation: 'modal'}}>

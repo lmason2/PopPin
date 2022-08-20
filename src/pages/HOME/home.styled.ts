@@ -172,3 +172,17 @@ export const ButtonContainer = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const LogoutOverlayContainer = styled.View`
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  left: 2%;
+  bottom: 5%;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  z-index: 1000;
+  opacity: 0.8;
+  border-radius: 50px;
+`;

@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {CommonActions, useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {FC, useEffect, useRef, useState} from 'react';
 import {Animated} from 'react-native';
@@ -21,7 +21,12 @@ export const CircleComponent: FC<{name: string}> = ({name}) => {
         useNativeDriver: true,
       }),
     ]).start(({}) => {
-      navigation.navigate('Home');
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'Home'}],
+        }),
+      );
     });
   }, [scale, setRemoveName, navigation]);
 
