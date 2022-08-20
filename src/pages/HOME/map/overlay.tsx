@@ -13,7 +13,7 @@ const Overlay = () => {
       <ButtonContainer>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('EventModal', {});
+            navigation.navigate('ModalStack', {});
           }}>
           <Icon name="event" type="material" color="white" />
         </TouchableOpacity>

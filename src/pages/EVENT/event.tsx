@@ -15,13 +15,17 @@ import {
   NextButton,
   DatePickButton,
   DateText,
-} from './map.styled';
-import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
+} from '../HOME/map/map.styled';
+import {KeyboardAvoidingView} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {ModalStackParamList} from '../../../App';
 
 const NewEvent = () => {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [moveScreen, setMoveScreen] = useState(false);
+  const navigation = useNavigation<StackNavigationProp<ModalStackParamList>>();
   const options = {
     weekday: 'long',
     month: 'short',
@@ -98,7 +102,10 @@ const NewEvent = () => {
               />
             </MultiLineInputContainer>
           </LabelInputContainer>
-          <NextButton>
+          <NextButton
+            onPress={() => {
+              navigation.navigate('AddHosts', {});
+            }}>
             <NextText>NEXT</NextText>
           </NextButton>
         </ModalContainer>

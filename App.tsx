@@ -14,12 +14,13 @@ import Welcome from './src/pages/welcome';
 import Home from './src/pages/HOME';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Modal from './src/pages/HOME/map/bar';
-import NewEvent from './src/pages/HOME/map/event';
+import NewEvent from './src/pages/EVENT/event';
 import Pre from './src/pages/pre';
-import {
-  CardStyleInterpolators,
-  TransitionPresets,
-} from '@react-navigation/stack';
+import AddHosts from './src/pages/EVENT/addHosts';
+import InviteHosts from './src/pages/EVENT/inviteHosts';
+import AddFriends from './src/pages/EVENT/addFriends';
+import InviteFriends from './src/pages/EVENT/inviteFriends';
+import EventDetails from './src/pages/EVENT/eventDetails';
 
 export type RootStackParamList = {
   Pre: {};
@@ -31,11 +32,37 @@ export type RootStackParamList = {
   AddUsername: {};
   Welcome: {};
   Home: {};
-  Modal: {};
-  EventModal: {};
+  ModalStack: {};
 };
 
-const Stack = createNativeStackNavigator();
+export type ModalStackParamList = {
+  EventModal: {};
+  Modal: {};
+  AddHosts: {};
+  InviteHosts: {};
+  AddFriends: {};
+  InviteFriends: {};
+  EventDetails: {};
+};
+
+const RootStack = createNativeStackNavigator();
+const ModalStack = createNativeStackNavigator();
+
+const ModalStackView = () => (
+  <ModalStack.Navigator screenOptions={{headerShown: false}}>
+    <ModalStack.Group screenOptions={{presentation: 'modal'}}>
+      <ModalStack.Screen name="EventModal" component={NewEvent} />
+      <ModalStack.Screen name="Modal" component={Modal} />
+    </ModalStack.Group>
+    <ModalStack.Group>
+      <ModalStack.Screen name="AddHosts" component={AddHosts} />
+      <ModalStack.Screen name="InviteHosts" component={InviteHosts} />
+      <ModalStack.Screen name="AddFriends" component={AddFriends} />
+      <ModalStack.Screen name="InviteFriends" component={InviteFriends} />
+      <ModalStack.Screen name="EventDetails" component={EventDetails} />
+    </ModalStack.Group>
+  </ModalStack.Navigator>
+);
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -44,31 +71,37 @@ const App = () => {
     <SafeAreaProvider>
       <NavigationContainer>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Group>
-            <Stack.Screen name="Pre Screen" component={Pre} />
-            <Stack.Screen
+        <RootStack.Navigator screenOptions={{headerShown: false}}>
+          <RootStack.Group>
+            <RootStack.Screen name="Pre Screen" component={Pre} />
+            <RootStack.Screen
               name="LoginHome"
               component={LoginHome}
               options={{animation: 'slide_from_bottom'}}
             />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="SearchColleges" component={SearchColleges} />
-            <Stack.Screen name="AddEmail" component={AddEmail} />
-            <Stack.Screen name="AddPassword" component={AddPassword} />
-            <Stack.Screen name="AddUsername" component={AddUsername} />
-            <Stack.Screen
+            <RootStack.Screen name="Login" component={Login} />
+            <RootStack.Screen
+              name="SearchColleges"
+              component={SearchColleges}
+            />
+            <RootStack.Screen name="AddEmail" component={AddEmail} />
+            <RootStack.Screen name="AddPassword" component={AddPassword} />
+            <RootStack.Screen name="AddUsername" component={AddUsername} />
+            <RootStack.Screen
               name="Welcome"
               component={Welcome}
               options={{animation: 'none'}}
             />
-            <Stack.Screen name="Home" component={Home} />
-          </Stack.Group>
-          <Stack.Group screenOptions={{presentation: 'modal'}}>
-            <Stack.Screen name="Modal" component={Modal} />
-            <Stack.Screen name="EventModal" component={NewEvent} />
-          </Stack.Group>
-        </Stack.Navigator>
+            <RootStack.Screen
+              name="ModalStack"
+              component={ModalStackView}
+              options={{
+                presentation: 'modal',
+              }}
+            />
+            <RootStack.Screen name="Home" component={Home} />
+          </RootStack.Group>
+        </RootStack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
   );
